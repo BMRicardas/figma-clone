@@ -1,5 +1,6 @@
 import {
   KeyboardEvent,
+  MutableRefObject,
   PointerEvent,
   useCallback,
   useEffect,
@@ -18,7 +19,11 @@ import { ReactionSelector } from "./reaction/reaction-button";
 import { FlyingReaction } from "./reaction/flying-reaction";
 import useInterval from "@/hooks/useInterval";
 
-export function Live() {
+interface Props {
+  canvasRef: MutableRefObject<HTMLCanvasElement | null>;
+}
+
+export function Live({ canvasRef }: Props) {
   const others = useOthers();
   //   @ts-expect-error
   const [{ cursor }, updateMyPresence] = useMyPresence();
@@ -144,23 +149,24 @@ export function Live() {
       }
     }
 
-    window.addEventListener("keyup", onKeyUp);
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", () => onKeyUp);
+    window.addEventListener("keydown", () => onKeyDown);
 
     return () => {
-      window.removeEventListener("keyup", onKeyUp);
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keyup", () => onKeyUp);
+      window.removeEventListener("keydown", () => onKeyDown);
     };
   }, [updateMyPresence]);
 
   return (
     <div
+      id="canvas"
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       className="h-[100vh] w-full flex justify-center items-center text-center">
-      <h1 className="text-2xl text-white">Liveblocks Figme Clone</h1>
+      <canvas ref={canvasRef} />
 
       {reactions.map((r) => (
         <FlyingReaction

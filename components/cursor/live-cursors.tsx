@@ -4,7 +4,7 @@ import { COLORS } from "@/constants";
 
 export default function LiveCursors({ others }: LiveCursorProps) {
   return others.map(({ connectionId, presence }) => {
-    if (!presence?.cursor) return null;
+    if (presence === null || !presence?.cursor) return null;
 
     return (
       <Cursor

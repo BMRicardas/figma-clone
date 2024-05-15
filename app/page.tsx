@@ -1,17 +1,49 @@
 "use client";
 
+import { use, useEffect, useRef } from "react";
+import { fabric } from "fabric";
+import {
+  handleCanvasMouseDown,
+  handleResize,
+  initializeFabric,
+} from "@/lib/canvas";
+
 import { Live } from "@/components/live";
 import { Navbar } from "@/components/navbar";
 import { LeftSidebar } from "@/components/left-sidebar";
 import { RightSidebar } from "@/components/right-sidebar";
 
 export default function Page() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fabricRef = useRef<fabric.Canvas | null>(null);
+  const isDrawing = useRef(false);
+  const shapeRef = useRef<fabric.Object | null>(null);
+  const selectedShapeRef = useRef<string | null>("rectangle");
+
+  useEffect(() => {
+    const canvas = initializeFabric({ canvasRef, fabricRef });
+
+    canvas.on("mouse:down", (options) => {
+      handleCanvasMouseDown({
+        options,
+        canvas,
+        isDrawing,
+        shapeRef,
+        selectedShapeRef,
+      });
+    });
+
+    window.addEventListener("resize", () => {
+      handleResize({ fabricRef });
+    });
+  }, []);
+
   return (
     <main className="h-screen overflow-hidden">
       <Navbar />
       <section className="flex h-full flex-row">
         <LeftSidebar />
-        <Live />
+        <Live canvasRef={canvasRef} />
         <RightSidebar />
       </section>
     </main>
