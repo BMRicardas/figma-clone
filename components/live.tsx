@@ -19,12 +19,21 @@ import { ReactionSelector } from "./reaction/reaction-button";
 import { FlyingReaction } from "./reaction/flying-reaction";
 import useInterval from "@/hooks/useInterval";
 import { Comments } from "./comments/comments";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import { shortcuts } from "@/constants";
 
 interface Props {
   canvasRef: MutableRefObject<HTMLCanvasElement | null>;
+  undo: () => void;
+  redo: () => void;
 }
 
-export function Live({ canvasRef }: Props) {
+export function Live({ canvasRef, undo, redo }: Props) {
   const others = useOthers();
   //   @ts-expect-error
   const [{ cursor }, updateMyPresence] = useMyPresence();
@@ -159,46 +168,91 @@ export function Live({ canvasRef }: Props) {
     };
   }, [updateMyPresence]);
 
+  const handleContextMenuClick = useCallback(
+    (key: string) => () => {
+      switch (key) {
+        case "Chat":
+          setCursorState({
+            mode: CursorMode.Chat,
+            previousMessage: null,
+            message: "",
+          });
+          break;
+
+        case "Undo":
+          undo();
+          break;
+
+        case "Redo":
+          redo();
+          break;
+
+        case "Reaction":
+          setCursorState({
+            mode: CursorMode.ReactionSelector,
+          });
+          break;
+
+        default:
+          break;
+      }
+    },
+    []
+  );
+
   return (
-    <div
-      id="canvas"
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-      onPointerDown={handlePointerDown}
-      onPointerUp={handlePointerUp}
-      className="relative h-full w-full flex flex-1 justify-center items-center">
-      <canvas ref={canvasRef} />
+    <ContextMenu>
+      <ContextMenuTrigger
+        id="canvas"
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        className="relative h-full w-full flex flex-1 justify-center items-center">
+        <canvas ref={canvasRef} />
 
-      {reactions.map((r) => (
-        <FlyingReaction
-          key={r.timestamp.toString()}
-          x={r.point.x}
-          y={r.point.y}
-          timestamp={r.timestamp}
-          value={r.value}
-        />
-      ))}
+        {reactions.map((r) => (
+          <FlyingReaction
+            key={r.timestamp.toString()}
+            x={r.point.x}
+            y={r.point.y}
+            timestamp={r.timestamp}
+            value={r.value}
+          />
+        ))}
 
-      {cursor && (
-        <CursorChat
-          cursor={cursor}
-          cursorState={cursorState}
-          setCursorState={setCursorState}
-          updateMyPresence={updateMyPresence}
-        />
-      )}
+        {cursor && (
+          <CursorChat
+            cursor={cursor}
+            cursorState={cursorState}
+            setCursorState={setCursorState}
+            updateMyPresence={updateMyPresence}
+          />
+        )}
 
-      {cursorState.mode === CursorMode.ReactionSelector && (
-        <ReactionSelector
-          setReaction={(reaction) => {
-            setReaction(reaction);
-          }}
-        />
-      )}
+        {cursorState.mode === CursorMode.ReactionSelector && (
+          <ReactionSelector
+            setReaction={(reaction) => {
+              setReaction(reaction);
+            }}
+          />
+        )}
 
-      <LiveCursors others={others} />
+        <LiveCursors others={others} />
 
-      <Comments />
-    </div>
+        <Comments />
+      </ContextMenuTrigger>
+      <ContextMenuContent className="right-menu-content">
+        {shortcuts.map((shortcut) => (
+          <ContextMenuItem
+            key={shortcut.key}
+            onClick={() => handleContextMenuClick(shortcut.name)}
+            className="right-menu-item">
+            <p>{shortcut.name}</p>
+            <p className="text-xs text-primary-grey-300">{shortcut.shortcut}</p>
+          </ContextMenuItem>
+        ))}
+      </ContextMenuContent>
+    </ContextMenu>
   );
 }
