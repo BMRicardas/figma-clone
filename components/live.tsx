@@ -10,7 +10,6 @@ import {
   useBroadcastEvent,
   useEventListener,
   useMyPresence,
-  useOthers,
 } from "@/liveblocks.config";
 import LiveCursors from "./cursor/live-cursors";
 import { CursorChat } from "./cursor/cursor-chat";
@@ -34,12 +33,11 @@ interface Props {
 }
 
 export function Live({ canvasRef, undo, redo }: Props) {
-  const others = useOthers();
-  //   @ts-expect-error
   const [{ cursor }, updateMyPresence] = useMyPresence();
   const [cursorState, setCursorState] = useState<CursorState>({
     mode: CursorMode.Hidden,
   });
+
   const [reactions, setReactions] = useState<Reaction[]>([]);
   const broadcast = useBroadcastEvent();
 
@@ -238,7 +236,7 @@ export function Live({ canvasRef, undo, redo }: Props) {
           />
         )}
 
-        <LiveCursors others={others} />
+        <LiveCursors />
 
         <Comments />
       </ContextMenuTrigger>
