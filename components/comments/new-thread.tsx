@@ -24,7 +24,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const NewThread = ({ children }: Props) => {
+export function NewThread({ children }: Props) {
   // set state to track if we're placing a new comment or not
   const [creatingCommentState, setCreatingCommentState] = useState<
     "placing" | "placed" | "complete"

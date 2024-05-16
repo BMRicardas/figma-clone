@@ -18,7 +18,7 @@ type OverlayThreadProps = {
   maxZIndex: number;
 };
 
-export const CommentsOverlay = () => {
+export function CommentsOverlay() {
   /**
    * We're using the useThreads hook to get the list of threads
    * in the room.
