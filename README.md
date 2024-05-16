@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Figma Clone
 
-## Getting Started
+## Description
 
-First, run the development server:
+This Figma clone is a web application built to explore various libraries and technologies for front-end development. It provides a platform for creating and editing design prototypes, aiming to replicate some of Figma's core functionalities.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Learning Objectives
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Framework**: Next.js - Mastered building server-rendered and statically generated web applications.
+- **Collaboration**: @liveblocks - Explored real-time collaboration features, enabling users to work together on designs.
+- **UI Components**: shadcn/ui - Experimented with accessible user interface components.
+- **Utility Libraries**: Utilized various libraries like class-variance-authority, clsx, fabric, jspdf, lucide-react to enhance application functionality.
+- **React & DOM**: Solidified foundation in building user interfaces with React and React DOM.
+- **Styling**: Tailwind CSS - Explored utility-first CSS framework for rapid and responsive styling.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technical Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Front-end**: Next.js, React, React DOM
+- **Collaboration**: @liveblocks/client, @liveblocks/react, @liveblocks/react-comments
+- **UI Components**: shadcn/ui
+- **Utility Libraries**: class-variance-authority, clsx, fabric, jspdf, lucide-react
+- **Styling**: Tailwind CSS, Tailwind CSS Animate
+- **Other**: uuid
 
-## Learn More
+## Development Tools
 
-To learn more about Next.js, take a look at the following resources:
+- **TypeScript**: Enhanced code maintainability and type safety.
+- **ESLint, eslint-config-next**: Maintained code quality and identified potential issues through linting.
+- **Autoprefixer, PostCSS**: Ensured cross-browser compatibility for CSS styles.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Reflection
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This project provided a valuable learning experience by allowing experimentation with various tools and technologies. Practical knowledge was gained in building a web application, exploring different libraries, and tackling challenges related to integrating real-time collaboration.
 
-## Deploy on Vercel
+## Live Demo (Optional)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[https://figma-clone-olive-nine.vercel.app/](https://figma-clone-olive-nine.vercel.app/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Code Repository
+
+Find the source code for this project on GitHub:
+
+[https://github.com/BMRicardas/figma-clone](https://github.com/BMRicardas/figma-clone)
