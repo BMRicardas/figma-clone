@@ -149,12 +149,12 @@ export function Live({ canvasRef }: Props) {
       }
     }
 
-    window.addEventListener("keyup", () => onKeyUp);
-    window.addEventListener("keydown", () => onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      window.removeEventListener("keyup", () => onKeyUp);
-      window.removeEventListener("keydown", () => onKeyDown);
+      window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [updateMyPresence]);
 
