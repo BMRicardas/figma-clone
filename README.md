@@ -32,12 +32,6 @@ This Figma clone is a web application built to explore various libraries and tec
 
 This project provided a valuable learning experience by allowing experimentation with various tools and technologies. Practical knowledge was gained in building a web application, exploring different libraries, and tackling challenges related to integrating real-time collaboration.
 
-## Live Demo (Optional)
+## Live Demo
 
 [https://figma-clone-olive-nine.vercel.app/](https://figma-clone-olive-nine.vercel.app/)
-
-## Code Repository
-
-Find the source code for this project on GitHub:
-
-[https://github.com/BMRicardas/figma-clone](https://github.com/BMRicardas/figma-clone)
