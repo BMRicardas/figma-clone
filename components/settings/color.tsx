@@ -1,3 +1,5 @@
+import { Label } from "../ui/label";
+
 type Props = {
   inputRef: any;
   attribute: string;

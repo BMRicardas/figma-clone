@@ -3,6 +3,13 @@ import {
   fontSizeOptions,
   fontWeightOptions,
 } from "@/constants";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 const selectConfigs = [
   {
