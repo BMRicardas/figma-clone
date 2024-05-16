@@ -72,9 +72,11 @@ export default function Page() {
 
     if (!canvasObjects || canvasObjects.size === 0) return true;
 
-    const objectsArray = Array.from(canvasObjects.entries());
+    const objectsArray: [string, unknown][] = Array.from(
+      canvasObjects.entries()
+    );
 
-    for (const [key, value] of objectsArray) {
+    for (const [key, _value] of objectsArray) {
       canvasObjects.delete(key);
     }
 
